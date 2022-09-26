@@ -31,14 +31,8 @@ public class Maximum_Sum{
         } return maxSoFar;
     }
 
-    int maxsum3(int[] A, int n) {
-        int m=A.length/2;;
-        int maxLL=0;
-        int sum=0;
 
-    }
-
-    int maxsum4(int A[], int n) {
+    int maxsum3(int A[], int n) {
         int maxSoFar = 0;
         int maxHere = 0;
         for (int i=0; i < n; i++) {

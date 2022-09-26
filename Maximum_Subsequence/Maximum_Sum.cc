@@ -1,18 +1,18 @@
 #include <iostream>
-#include <fstream>
 using namespace std;
 
 int main(){
-    ifstream filein("input.txt");
-    ofstream fileout("output.txt");
-
     int sequence[100000];
 
     int N;
-    filein >> N;
+    cout << "Insert the number of integers: " ;
+    cin >> N;
+    
 
     for(int i = 0; i < N; i++){
-        filein >> sequence[i];
+        cout << "Insert element " << i <<  ": ";
+        cin >> sequence[i];
+        cout << endl;
     }
     int maxSoFar=0;
     int maxHere=0;
@@ -23,7 +23,7 @@ int main(){
     }
 
 
-    fileout << maxSoFar;
+    cout << "The Maximum Subsequence Sum is: " << maxSoFar << endl << endl;
     
     return 0;
 }
