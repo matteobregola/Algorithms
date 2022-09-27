@@ -85,7 +85,7 @@ void print_array(int a[],int dim){
 
 void create_array(int * arr, int dim){
     for(int i=0; i<dim; i++){
-        cout << "Inserisci elemento: ";
+        cout << "Insert  element: ";
         int n;
         cin >> n;
         arr[i] =n;
