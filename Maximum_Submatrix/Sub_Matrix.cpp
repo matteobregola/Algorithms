@@ -1,8 +1,9 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 using namespace std;
 
-int KadaneAlgorithm(const int row_sum[], int N){
+int KadaneAlgorithm(const vector <int> row_sum, int N){
     int maxHere=0;
     int maxSoFar=0;
 
@@ -45,17 +46,19 @@ int main(){
     int maxRectangleSum=0;
 
     
-
+    
     for(int i=0; i<COLUMNS; i++) {
+        vector <int> row_sum(1000,0);
         for(int j=i; j<COLUMNS; j++){
             // da j=i to avoid swaps
             
             // i have to eval row_sum (from i to j)
-            int row_sum[1000];
+            
 
             for (int m=0; m < ROWS; m++)
             {
-                row_sum[m]=sum_line(matrix,m,i,j);
+                row_sum[m] += matrix[m][j];
+               // row_sum[m]=sum_line(matrix,m,i,j);
             }
 
             // i have to apply the KadaneAlgorithm to row_sum
@@ -65,7 +68,8 @@ int main(){
             if(result>maxRectangleSum){
                 maxRectangleSum=result;
                 
-            }            
+            }
+              
         }
     }
     fileout << maxRectangleSum;
