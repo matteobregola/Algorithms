@@ -16,7 +16,6 @@ int main(){
 
     InsertionSort(array, 10);
     
-
     print_array(array, 10);
 
 }
@@ -34,7 +33,6 @@ void InsertionSort(int A[], int n){
         print_array(A,n); //remove to see the steps
     }
 }
-
 
 
 

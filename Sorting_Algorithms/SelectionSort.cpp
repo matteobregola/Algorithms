@@ -15,8 +15,7 @@ int main(){
     int array[10];
     create_array(array, 10);
 
-    SelectionSort(array, 10);
-    // SelectionSort2(array, 10);
+    SelectionSort(array, 10); // SelectionSort2(array, 10);
 
     print_array(array, 10);
 
@@ -46,7 +45,7 @@ void SelectionSort(int A[], int n){
         A[i]=swap.first;
         A[swap.second]=tmp;
 
-        //print_array(A,n); remove to see the steps
+        //print_array(A,n);  to see the steps
     }
 }
 
