@@ -1,0 +1,16 @@
+//Karatsuba Algorithm for binary multiplication
+
+
+boolean []Karatsuba(boolean[]X, boolean[]Y, int n){
+    if (n==1) then 
+        return X[1]*Y[1]
+    else
+        divide X in a; b e Y in c; d
+        boolean[] A1= Karatsuba(a,c,n/2)
+        boolean[] A3= Karatsuba(b,d,n/2)
+        boolean[] m= Karatsuba(a+b,c+d,n/2)
+        boolean[] A2= m-A1-A2
+        return A1*2^(n)+A2*s^(n/2)+A3
+
+    
+}
