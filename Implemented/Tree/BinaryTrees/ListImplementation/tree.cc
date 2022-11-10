@@ -313,27 +313,7 @@ void depth_first_search(const tree & t, int mode=0){
     }
   }
 }
-void depth_first_search2(const tree & t, int mode=0){
-  if(!nullp(t)){
-    if(mode==0){
-      // pre order
-      print_pre_ordered(t);
-    }
-    else{
-      if(mode==1){
-        print_ordered(t);
-      }
-      else{
-        if(mode==2){
-          print_post_ordered(t);
-        }
-        else{
-          cout << "mod not valid" << endl;
-        }
-      }
-    }
-  }
-}
+
 void print_indented(const tree & t) { 
   static int depth=0;
   depth++;
