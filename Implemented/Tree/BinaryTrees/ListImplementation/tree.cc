@@ -198,6 +198,7 @@ not working
 **/ 
 
 
+
 tree find_child(const tree & t){
   tree current= t;
   // find the leftmost leaf
@@ -269,6 +270,70 @@ void print_ordered(const tree & t) {
   // print with order
 }
 
+void print_pre_ordered(const tree & t) {
+  if (!emptyp(t)) {
+    cout << t->item << endl;
+    print_ordered(t->left);
+    print_ordered(t->right);
+  }
+  // print with order
+}
+
+void print_post_ordered(const tree & t) {
+  if (!emptyp(t)) {
+    print_ordered(t->left);
+    print_ordered(t->right);
+    cout << t->item << endl;
+  }
+  // print with order
+}
+void depth_first_search(const tree & t, int mode=0){
+  if(!nullp(t)){
+    if(mode==0){
+      cout << t->item << " ";
+      depth_first_search(t->left,mode);
+      depth_first_search(t->right,mode);
+    }
+    else{
+      if(mode==1){
+        depth_first_search(t->left,mode);
+        cout << t->item << " ";
+        depth_first_search(t->right,mode);
+      }
+      else{
+        if(mode==2){
+          depth_first_search(t->left,mode);
+          depth_first_search(t->right,mode);
+          cout << t->item << " ";
+        }
+        else{
+          cout << "mode not valid" << endl;
+        }
+      }
+    }
+  }
+}
+void depth_first_search2(const tree & t, int mode=0){
+  if(!nullp(t)){
+    if(mode==0){
+      // pre order
+      print_pre_ordered(t);
+    }
+    else{
+      if(mode==1){
+        print_ordered(t);
+      }
+      else{
+        if(mode==2){
+          print_post_ordered(t);
+        }
+        else{
+          cout << "mod not valid" << endl;
+        }
+      }
+    }
+  }
+}
 void print_indented(const tree & t) { 
   static int depth=0;
   depth++;

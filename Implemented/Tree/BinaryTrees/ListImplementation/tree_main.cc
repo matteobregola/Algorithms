@@ -7,6 +7,7 @@ using namespace std;
 int main() 
 {
   char option,val;
+  int val2;
   tree t, tmp;
   tree new_node;
   retval res;
@@ -16,7 +17,8 @@ int main()
          << "Insertion (i)\n" 
          << "Search(r)\n" 
          << "Print with order (s)\n" 
-         << "Parent finder (p)\n"
+         //<< "Parent finder (p)\n"
+         <<" Depth first search (q)\n" 
          << "Print indented (e)\n"
          << "Delete element (d)\n"
          << "Fine (f)\n";
@@ -37,6 +39,11 @@ int main()
         cout << "Value Found!: " << val << endl;
       else
         cout << "Value non Found!\n";
+      break;
+    case 'q':
+      cout << "Mode? : ";
+      cin >> val2;
+      depth_first_search(t,val2);
       break;
 
       /**

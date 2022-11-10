@@ -19,6 +19,7 @@ void deinit(tree &);
 bool nullp(const tree & ); //check if the tree is empty
 retval insert(tree &, char); //insert an element into the tree
 tree search (const tree &,char); //search in the tree
+void depth_first_search(const tree & , int);
 void print_ordered(const tree &); //ordered print
 void print_indented(const tree &); // stamp with a tree structure
 
