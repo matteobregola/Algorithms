@@ -16,7 +16,7 @@ int main()
     cout << "\nPossible Operations:\n"
          << "Insertion (i)\n" 
          << "Search(r)\n" 
-         << "Count nodes(c)"
+         << "Count nodes(c)\n"
          << "Print with order (s)\n" 
          //<< "Parent finder (p)\n"
          << "Print indented (e)\n"
