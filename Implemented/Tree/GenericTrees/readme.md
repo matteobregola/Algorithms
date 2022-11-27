@@ -36,5 +36,5 @@ This folder contains the implementation of a generic tree.
 9. void deletechild(tree) -> delete the leftmost child (not all the subtrees) if he has sibiling this are preserved
 10. deletesibiling(tree) -> delete the sibiling on the right
 11. deletetree(tree)-> delete the tree and all the subtrees
-12. depthfirstsearch()
-13. breadthfirstsearch()
+12. depthfirstsearch(tree)
+13. breadthfirstsearch(tree)

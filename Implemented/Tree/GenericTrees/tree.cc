@@ -111,3 +111,28 @@ void deletetree(tree t){
   }
   delete t;
 }
+
+
+
+void depthfirstsearch(tree t){
+  if(t==NULL){
+    return;
+  }
+  
+  //here for pre order
+  else{
+    
+    tree u=t->child;
+    while (u!=NULL){
+      depthfirstsearch(u);
+      u=u->sibiling;
+    }
+    read(t);
+    //here for postorder
+  }
+}
+
+
+void breadthfirstsearch(tree t){
+  
+}

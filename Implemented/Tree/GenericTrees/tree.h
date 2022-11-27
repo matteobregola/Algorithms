@@ -24,4 +24,7 @@ void insertsibiling(tree, tree);
 void deletechild(tree); 
 void deletesibiling(tree);
 void deletetree(tree);
+void depthfirstsearch(tree);
+void breadthfirstsearch(tree);
+
 #endif

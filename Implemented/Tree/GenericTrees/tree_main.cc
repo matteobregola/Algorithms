@@ -7,31 +7,24 @@ using namespace std;
 int main() 
 {
   
-  tree t=init(4);
-  write(t,5);
-  tree m= parent(t);
-  read(m); // GENERATE AN ERROR ON PURPOSE
-
-  
-  tree childT1=init(50); 
-  insertchild(t,childT1);
-  cout << t->child->item << endl;
-  cout << childT1->parent->item << endl;
-
-  tree sibiling_childT1=init(60);
-  insertsibiling(childT1,sibiling_childT1);
-  tree sibiling_childT2=init(600);
-  insertsibiling(sibiling_childT1,sibiling_childT2);
-  deletesibiling(childT1);
-  read(sibiling_childT2);
-
-  
-  tree childT2=init(51); 
-  insertchild(t,childT2);
-  tree childT3=init(52); 
-  insertchild(t,childT3);
-  tree childT4=init(53); 
-  insertchild(t,childT4);
-  //deletetree(t);  
+  tree a= init(1);
+  tree b= init(2);
+  tree c= init(3);
+  tree d= init(4);
+  tree e= init(5);
+  tree f= init(6);
+  tree g= init(7);
+  tree h= init(8);
+  tree i= init(9);
+  insertchild(a,b);
+  insertsibiling(b,i);
+  insertsibiling(b,e);
+  insertchild(b,c);
+  insertsibiling(c,d);
+  insertchild(e,f);
+  insertsibiling(f,h);
+  insertsibiling(f,g);
+  breadthfirstsearch(a);
+  deletetree(a);  
 
 }
