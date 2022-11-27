@@ -22,11 +22,10 @@ void init(tree & t) {
 
 void deinit(tree & t) {
   if (!emptyp(t)) {
-    deinit(t->left);
-    deinit(t->right);
+    deinit(t->sibiling);
+    deinit(t->child);
     delete t;
   }
-  // if the node is not empty delete left and then right
 }
 
 
@@ -35,14 +34,14 @@ bool nullp(const tree & t) {
   // checks if the node is empty
 }
 
-retval insert(tree & t, char v) {
-  retval res;
+bool insert_aux(tree & t, int v) {
+  bool res;
   if (emptyp(t)) {
   // memo: "new (nothrow) ..." return NULL
   // if the allocation can't occur
     t = new (nothrow) node;
     if (t==NULL)
-      res = FAIL; 
+      res = false; 
     else {
       t->item = v;
       t->left = NULL; 
@@ -62,7 +61,11 @@ retval insert(tree & t, char v) {
 
 }
 
-tree  search (const tree & t,char elem) { 
+bool insert(const tree & t,  int v ){
+  return insert_aux(t,v,t->parent);
+}
+
+tree  search (const tree & t,int elem) { 
   tree res;
   if (emptyp(t)) 
     res = NULL;
@@ -77,7 +80,7 @@ tree  search (const tree & t,char elem) {
 }
 
 
-tree search_iterative(const tree & t, char elem){
+tree search_iterative(const tree & t, int elem){
   bool trovato=false;
   tree res;
   if (emptyp(t)){
@@ -104,13 +107,13 @@ tree search_iterative(const tree & t, char elem){
   return res;
 }
 
-retval insert_iterative(tree & t, char v){
-  retval res= OK;
+bool insert_iterative(tree & t, int v){
+  bool res= OK;
   bool inserted=false;
 
   tree new_node = new (nothrow) node ;
   if(new_node==NULL){
-    res = FAIL; // if i have no space in RAM
+    res = false; // if i have no space in RAM
   }
   else{
     new_node->item=v;
@@ -129,7 +132,7 @@ retval insert_iterative(tree & t, char v){
     {
       if(new_node->item==temp->item){
         inserted=true;
-        res= FAIL;
+        res= false;
         // no duplicates, if wanted i can insert them left**
         // delete this and set <= in the 2 instructions below
         
@@ -216,21 +219,21 @@ tree find_child(const tree & t){
   return current;
 }
 
-// here should be char
-void print_path(const tree & root, int element) {
-  if (root == NULL) {
-    cout << "Elemento not found!" << endl;
+// here should be int
+void stampa_percorso(const tree & radice, int elemento) {
+  if (radice == NULL) {
+    cout << "Elemento non trovato!" << endl;
   }
-  else if (root->item == element) {
-    cout << "found!" << endl;
+  else if (radice->item == elemento) {
+    cout << "Trovato!" << endl;
   }
-  else if (root->item < element) {
-    cout << root->item << ", right" << endl;
-    print_path(root->right, element);
+  else if (radice->item < elemento) {
+    cout << radice->item << ", destra" << endl;
+    stampa_percorso(radice->right, elemento);
   }
   else {
-    cout << root->item << ", lrft" << endl;
-    print_path(root->left, element);
+    cout << radice->item << ", sinistra" << endl;
+    stampa_percorso(radice->left, elemento);
   }
   //print the path from the root to the node
 }

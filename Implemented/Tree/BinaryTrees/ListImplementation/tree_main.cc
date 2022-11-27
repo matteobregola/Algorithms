@@ -16,10 +16,11 @@ int main()
     cout << "\nPossible Operations:\n"
          << "Insertion (i)\n" 
          << "Search(r)\n" 
+         << "Count nodes(c)"
          << "Print with order (s)\n" 
          //<< "Parent finder (p)\n"
-         <<" Depth first search (q)\n" 
          << "Print indented (e)\n"
+         <<"Depth first search (q)\n" 
          << "Delete element (d)\n"
          << "Fine (f)\n";
     cin >> option;
@@ -39,6 +40,11 @@ int main()
         cout << "Value Found!: " << val << endl;
       else
         cout << "Value non Found!\n";
+      break;
+    
+    case 'c':
+      cout<< count(t);
+      
       break;
     case 'q':
       cout << "Mode? : ";
