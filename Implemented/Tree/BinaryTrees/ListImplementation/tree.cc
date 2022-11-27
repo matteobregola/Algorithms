@@ -189,23 +189,6 @@ static bool father_of_one(tree &t){
   return result;
 }
 
-/**
-tree find_parent(const tree &t, const tree &child){
-  tree res;
-  if (emptyp(t)) 
-    res = NULL;
-  else if(t->left==child || t->right==child)
-    res = t;
-  else if (child->item < t->item) 
-    res = find_parent(t->left,child);
-  else if (child->item > t->item)
-    res = find_parent(t->right,child);
-  return res;
-}
-not working
-**/ 
-
-
 
 tree find_child(const tree & t){
   tree current= t;
@@ -216,25 +199,35 @@ tree find_child(const tree & t){
   return current;
 }
 
-// here should be char
-void print_path(const tree & root, int element) {
-  if (root == NULL) {
-    cout << "Elemento not found!" << endl;
+void depth_first_search(const tree & t, int mode=0){
+  if(!nullp(t)){
+    if(mode==0){
+      // do here the pre order actions
+      cout << t->item << " ";
+      depth_first_search(t->left,mode);
+      depth_first_search(t->right,mode);
+    }
+    else{
+      if(mode==1){
+        depth_first_search(t->left,mode);
+        //do here the in order actions
+        cout << t->item << " ";
+        depth_first_search(t->right,mode);
+      }
+      else{
+        if(mode==2){
+          depth_first_search(t->left,mode);
+          depth_first_search(t->right,mode);
+          //do here the post order actions
+          cout << t->item << " ";
+        }
+        else{
+          cout << "mode not valid" << endl;
+        }
+      }
+    }
   }
-  else if (root->item == element) {
-    cout << "found!" << endl;
-  }
-  else if (root->item < element) {
-    cout << root->item << ", right" << endl;
-    print_path(root->right, element);
-  }
-  else {
-    cout << root->item << ", lrft" << endl;
-    print_path(root->left, element);
-  }
-  //print the path from the root to the node
 }
-
 
 tree delete_node(tree &r, int v){
   if(r==NULL){
@@ -269,6 +262,25 @@ tree delete_node(tree &r, int v){
   return r;
 }
 
+// here should be char
+void print_path(const tree & root, int element) {
+  if (root == NULL) {
+    cout << "Elemento not found!" << endl;
+  }
+  else if (root->item == element) {
+    cout << "found!" << endl;
+  }
+  else if (root->item < element) {
+    cout << root->item << ", right" << endl;
+    print_path(root->right, element);
+  }
+  else {
+    cout << root->item << ", lrft" << endl;
+    print_path(root->left, element);
+  }
+  //print the path from the root to the node
+}
+
 void print_ordered(const tree & t) {
   if (!emptyp(t)) {
     print_ordered(t->left);
@@ -277,7 +289,6 @@ void print_ordered(const tree & t) {
   }
   // print with order
 }
-
 
 void print_pre_ordered(const tree & t) {
   if (!emptyp(t)) {
@@ -296,32 +307,6 @@ void print_post_ordered(const tree & t) {
   }
   // print with order
 }
-void depth_first_search(const tree & t, int mode=0){
-  if(!nullp(t)){
-    if(mode==0){
-      cout << t->item << " ";
-      depth_first_search(t->left,mode);
-      depth_first_search(t->right,mode);
-    }
-    else{
-      if(mode==1){
-        depth_first_search(t->left,mode);
-        cout << t->item << " ";
-        depth_first_search(t->right,mode);
-      }
-      else{
-        if(mode==2){
-          depth_first_search(t->left,mode);
-          depth_first_search(t->right,mode);
-          cout << t->item << " ";
-        }
-        else{
-          cout << "mode not valid" << endl;
-        }
-      }
-    }
-  }
-}
 
 void print_indented(const tree & t) { 
   static int depth=0;
@@ -337,3 +322,19 @@ void print_indented(const tree & t) {
 }
 
 
+
+/**
+tree find_parent(const tree &t, const tree &child){
+  tree res;
+  if (emptyp(t)) 
+    res = NULL;
+  else if(t->left==child || t->right==child)
+    res = t;
+  else if (child->item < t->item) 
+    res = find_parent(t->left,child);
+  else if (child->item > t->item)
+    res = find_parent(t->right,child);
+  return res;
+}
+not working
+**/ 
