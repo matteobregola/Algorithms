@@ -22,7 +22,7 @@ int main()
          << "Print indented (e)\n"
          <<"Depth first search (q)\n" 
          << "Delete element (d)\n"
-         << "Fine (f)\n";
+         << "Exit (f)\n";
     cin >> option;
     switch (option) {
     case 'i':
