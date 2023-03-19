@@ -10,6 +10,7 @@ int main()
   tree t, tmp;
   tree new_node;
   retval res;
+  char arr[6]={'a', 'b', 'c', 'd', 'e','f'};
   init(t);
   do {
     cout << "\nPossible Operations:\n"
@@ -18,6 +19,7 @@ int main()
          << "Count nodes(c)\n"
          << "Print with order (s)\n" 
          //<< "Parent finder (p)\n"
+         << "Minimum distance (m)\n"
          << "Node level (a)\n"
          << "Node level recursive (x)\n"
          << "Print indented (e)\n"
@@ -61,6 +63,9 @@ int main()
         cout << "The father is: "<<  find_parent(t,search(t,val))->item << endl;
         break;
       **/
+    case 'm':
+      cout << "The minimum distance is: " <<minimum_distance(t) << endl;
+      break;
     case 'd':
       cout << "Insert the value of the element to delete: " ;
       cin >>val;
@@ -76,8 +81,6 @@ int main()
     case 's':
       cout << "Print ordered:\n";
       print_ordered(t);
-      break;
-
     case 'a':
       cout << "Insert the level: " ;
       cin >>val2;

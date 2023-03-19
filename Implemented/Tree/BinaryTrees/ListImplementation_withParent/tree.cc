@@ -2,6 +2,8 @@ using namespace std;
 #include <iostream>
 #include "tree.h"
 #include <queue>
+#include <cmath>
+#include <limits.h>
 // AUXILIARY FUNCTIONS 
 
 static void print_spaces(int depth) {
@@ -35,7 +37,8 @@ bool nullp(const tree & t) {
   // checks if the node is empty
 }
 
-retval insert(tree & t, char v) {
+
+retval insert_wrapp(tree & t, char v, tree parent) {
   retval res;
   if (emptyp(t)) {
   // memo: "new (nothrow) ..." return NULL
@@ -47,13 +50,14 @@ retval insert(tree & t, char v) {
       t->item = v;
       t->left = NULL; 
       t->right = NULL; 
+      t->parent= parent;
       res = OK;
     }
   }
   else if (v <= t->item) 
-    res = insert(t->left, v);
+    res = insert_wrapp(t->left, v,t);
   else if (v > t->item) 
-    res = insert(t->right, v);
+    res = insert_wrapp(t->right, v,t);
   return res;
 
   // insert a new node in the tree
@@ -61,6 +65,13 @@ retval insert(tree & t, char v) {
   // if equal insert to the left
 
 }
+
+retval insert(tree & t, char v){
+    if(t==NULL)
+      return insert_wrapp(t,v,NULL);
+  return insert_wrapp(t, v, t->parent);
+}
+
 
 tree  search (const tree & t,char elem) { 
   tree res;
@@ -105,6 +116,7 @@ tree search_iterative(const tree & t, char elem){
 }
 
 retval insert_iterative(tree & t, char v){
+  // DOES NOT UPDATE PARENTS!!!!
   retval res= OK;
   bool inserted=false;
 
@@ -378,6 +390,45 @@ int depth(tree t, int k){
   }
   return depth(t->left,k-1)+ depth(t->right,k-1);
 }
+
+int minimum_distance(const tree t){
+  int minnow= INT_MAX;
+  if(t==NULL){
+    return INT_MAX;
+  }
+  if(t->parent!=NULL){
+    // controllo di non essere nella radice
+    int value=std::abs((t->item)-(t->parent->item));
+    minnow=min(minnow,value);
+  }
+  minnow=min(minnow,minimum_distance(t->right));
+  minnow=min(minnow,minimum_distance(t->left));
+  return minnow;
+}
+
+
+
+
+/**
+tree createtree(char *v, tree root, int i, int j){
+  if (i>j)
+    return root;
+  else{
+    int m=floor(i+(j-1)/2);
+    root->item=v[m];
+    root->right=createtree(v,root->right,m+1,j);
+    root->left=createtree(v,root->left,i,m-1);
+  }
+}
+tree createtree(char * v){
+  //given an ordered v, creates a binary search ytrr
+
+  tree t;
+  int dim= sizeof(v)/sizeof(char);
+  return createtree(v,t,0,dim);
+}
+
+**/
 
 
 /**

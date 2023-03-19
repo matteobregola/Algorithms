@@ -1,7 +1,6 @@
 #ifndef TREE_H 
 #define TREE_H 
 #include <iostream>
-#include <tuple>
 
 using namespace std;
 
@@ -24,7 +23,7 @@ typedef node * tree;
 
 struct node 
 {  
-  tuple <char>item; // tree of chars
+  char  item[2]; // key,value
   tree parent;
   tree left;  
   tree right;
@@ -34,8 +33,8 @@ void init(tree &); //initialize the tree
 void deinit(tree &); 
 
 bool nullp(const tree & ); //check if the tree is empty
-bool insert(tree &, char); //insert an element into the tree
-tree search (const tree &,char); //search in the tree
+bool insert(tree &, char[2]); //insert an element into the tree
+tree search (const tree &,char[2]); //search in the tree
 
 void depth_first_search(const tree & , int);
 void print_indented(const tree &); // stamp with a tree structure
@@ -77,7 +76,7 @@ bool nullp(const tree & t) {
 }
 
 
-bool insert_aux(tree & father, tree & t, char v) {
+bool insert_aux(tree & father, tree & t, char * v) {
   bool res;
   if (emptyp(t)) {
   // memo: "new (nothrow) ..." return NULL
@@ -86,16 +85,17 @@ bool insert_aux(tree & father, tree & t, char v) {
     if (t==NULL)
       res = false; 
     else {
-      t->item = v;
+      t->item[0] =v[0];
+      t->item[1] =v[1];
       t->left = NULL; 
       t->right = NULL; 
       t->parent = father;
       res = true;
     }
   }
-  else if (v <= t->item) 
+  else if (v[0] <= t->item[0]) 
     res = insert_aux(t,t->left, v);
-  else if (v > t->item) 
+  else if (v [0]> t->item[0]) 
     res = insert_aux(t,t->right, v);
   return res;
 
@@ -104,7 +104,7 @@ bool insert_aux(tree & father, tree & t, char v) {
   // if equal insert to the left
 
 }
-bool insert(tree & t, char v){
+bool insert(tree & t, char * v){
   if(t==NULL){
     tree m=NULL;
     return insert_aux(m,t,v);
@@ -117,11 +117,11 @@ tree  search (const tree & t,char elem) {
   tree res;
   if (emptyp(t)) 
     res = NULL;
-  else if (elem==t->item)
+  else if (elem==t->item[0])
     res = t;
-  else if (elem < t->item) 
+  else if (elem < t->item[0]) 
     res = search(t->left,elem);
-  else if (elem > t->item)
+  else if (elem > t->item[0])
     res = search(t->right,elem);
   return res;
   
@@ -131,7 +131,7 @@ void depth_first_search(const tree & t, int mode=0){
   if(!nullp(t)){
     if(mode==0){
       // do here the pre order actions
-      cout << t->item << " ";
+      cout << t->item[0]<< ":"<< t->item[1] ;
       depth_first_search(t->left,mode);
       depth_first_search(t->right,mode);
     }
@@ -139,7 +139,7 @@ void depth_first_search(const tree & t, int mode=0){
       if(mode==1){
         depth_first_search(t->left,mode);
         //do here the in order actions
-        cout << t->item << " ";
+        cout << t->item[0]<< ":"<< t->item[1] ;
         depth_first_search(t->right,mode);
       }
       else{
@@ -147,7 +147,7 @@ void depth_first_search(const tree & t, int mode=0){
           depth_first_search(t->left,mode);
           depth_first_search(t->right,mode);
           //do here the post order actions
-          cout << t->item << " ";
+          cout << t->item[0]<< ":"<< t->item[1] ;
         }
         else{
           cout << "mode not valid" << endl;
@@ -180,11 +180,54 @@ void print_indented(const tree & t) {
   if (!emptyp(t)) {
     print_indented(t->right);
     print_spaces(depth);
-    cout << t->item << endl;
+    cout << t->item[0]<<":"<<t->item[1] << endl;
     print_indented(t->left);
   }
   depth--;
   // print with depth
 }
 
+
+tree find_child(const tree & t){
+  tree current= t;
+  // find the leftmost leaf
+  while(current->left !=NULL){
+    current=current->left;
+  }
+  return current;
+}
+
+tree delete_node(tree &r, int v){
+  if(r==NULL){
+    return NULL;
+  }
+  else if(v<r->item[1]){
+    r->left=delete_node(r->left,v);
+  }
+  else if(v>r->item[1]){
+    r->right=delete_node(r->right,v);
+  }
+  else{
+    if(r->left==NULL){
+      //1 or 0 child
+      tree temp=r->right;
+      delete r;
+      return temp;
+    }
+    else if(r->right==NULL){
+      tree temp=r->left;
+      delete r;
+      return temp;
+    }
+    else{
+      tree temp=find_child(r->right);
+      r->item[0]=temp->item[0];
+      r->item[1]=temp->item[1];
+      r->right=delete_node(r->right,temp->item[1]);
+    }
+  }
+  // given a tree t, if i want to delete the node with the value 4 
+  // then delete_node(t,4)
+  return r;
+}
 #endif

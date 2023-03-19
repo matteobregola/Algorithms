@@ -1,7 +1,7 @@
 using namespace std;
 #include <iostream>
 #include "tree.h"
-
+#include <stdlib.h>
 tree init(int v) {
   tree t= new node;
   t->item=v;

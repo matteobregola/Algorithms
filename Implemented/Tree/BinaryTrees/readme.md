@@ -11,7 +11,9 @@ This folder contains the implementation of a binary tree.
 > 2. Using linked lists:
 >       In this option we can choose to have information only about the 
 >       children of the tree or even of the parent. The solution provided
->       does not contain info about the parents. But is a **search binary tree**,
+>       does not contain info about the parents 
+>       (You can find it in the dictionary folder).
+>       But is a **search binary tree**,
 >       this means that on the left subtree there are only values minor than the root
 >       while in the right subtree there are only values major than the root.
 >   

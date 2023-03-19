@@ -12,6 +12,7 @@ struct node
   char item; // tree of chars
   tree left;  
   tree right;
+  tree parent;
 };
 struct nodeLevel {
     tree node;
@@ -35,6 +36,7 @@ tree find_parent(const tree & , const tree & );
 void print_path(const tree & root, int element);
 int node_level (const tree t,int k);
 int depth (const tree t,int k);
-
+int minimum_distance (const tree t);
+//tree createtree(char * v);
 
 #endif
